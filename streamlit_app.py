@@ -1,5 +1,7 @@
 import streamlit as st
 from supabase import create_client
+import datetime
+
 
 # Supabase 接続
 SUPABASE_URL = "https://uidimomhqldplhtvbchz.supabase.co"
@@ -16,25 +18,32 @@ st.title("📝 Todoリスト管理アプリ")
 st.subheader("Todoを追加")
 
 new_todo = st.text_input("やること")
+due_date = st.date_input(
+    "期限",
+    value=None
+)
+
 
 if st.button("追加"):
     if new_todo:
         supabase.table("todos").insert({
-            "title": new_todo
+            "title": new_todo,
+            "due_date": due_date
         }).execute()
         st.success("Todoを追加しました")
         st.rerun()
+
 
 # --- Todo一覧 ---
 st.subheader("Todo一覧")
 
 res = supabase.table("todos").select("*").order("created_at").execute()
-st.write(res)
-st.write(res.data)
-st.stop()
+
+
+todos = res.data or []
 
 for todo in todos:
-    col1, col2, col3 = st.columns([6, 2, 2])
+    col1, col2, col3 = st.columns([5, 3, 2])
 
     with col1:
         done = st.checkbox(
@@ -43,19 +52,11 @@ for todo in todos:
             key=todo["id"]
         )
 
-        # 完了状態更新
-        if done != todo["is_done"]:
-            supabase.table("todos").update({
-                "is_done": done
-            }).eq("id", todo["id"]).execute()
-            st.rerun()
-
     with col2:
-        st.write("✅" if todo["is_done"] else "")
+        if todo["due_date"]:
+            st.write(f"📅 {todo['due_date']}")
+        else:
+            st.write("期限なし")
 
-    with col3:
-        if st.button("削除", key=f"del-{todo['id']}"):
-            supabase.table("todos").delete().eq("id", todo["id"]).execute()
-            st.rerun()
 
 
