@@ -5,7 +5,7 @@ from supabase import create_client
 SUPABASE_URL = "https://uidimomhqldplhtvbchz.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpZGltb21ocWxkcGxodHZiY2h6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkwMjAyOTksImV4cCI6MjA4NDU5NjI5OX0.mzoug_p5WpFFQTUq-TTsffA8n7uRI77IqdZpAR5pTYg"
 supabase = create_client(
-    SUPABASE_URL
+    SUPABASE_URL,
     SUPABASE_KEY
 )
 
