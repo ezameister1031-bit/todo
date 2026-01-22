@@ -28,9 +28,10 @@ if st.button("追加"):
 # --- Todo一覧 ---
 st.subheader("Todo一覧")
 
-todos = supabase.table("todos").select("*").order("created_at").execute().data or []
-
-st.write(todos.data)
+res = supabase.table("todos").select("*").order("created_at").execute()
+st.write(res)
+st.write(res.data)
+st.stop()
 
 for todo in todos:
     col1, col2, col3 = st.columns([6, 2, 2])
