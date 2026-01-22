@@ -2,7 +2,7 @@ import streamlit as st
 from supabase import create_client
 
 # Supabase 接続
-SUPABASE_URL = "https://supabase.com/dashboard/project/uidimomhqldplhtvbchz"
+SUPABASE_URL = "https://uidimomhqldplhtvbchz.supabase.co"
 SUPABASE_KEY = "sb_publishable_rE4-yWr4dICRl3laxhjspA_mbAVh5TW"
 supabase = create_client(
     st.secrets["SUPABASE_URL"],
