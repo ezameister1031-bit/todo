@@ -8,6 +8,7 @@ supabase = create_client(
     SUPABASE_URL,
     SUPABASE_KEY
 )
+select * from todos;
 
 st.title("📝 Todoリスト管理アプリ")
 
