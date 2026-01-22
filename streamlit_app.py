@@ -3,7 +3,7 @@ from supabase import create_client
 
 # Supabase 接続
 SUPABASE_URL = "https://uidimomhqldplhtvbchz.supabase.co"
-SUPABASE_KEY = "sb_publishable_rE4-yWr4dICRl3laxhjspA_mbAVh5TW"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpZGltb21ocWxkcGxodHZiY2h6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkwMjAyOTksImV4cCI6MjA4NDU5NjI5OX0.mzoug_p5WpFFQTUq-TTsffA8n7uRI77IqdZpAR5pTYg"
 supabase = create_client(
     st.secrets["SUPABASE_URL"],
     st.secrets["SUPABASE_KEY"]
