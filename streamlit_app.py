@@ -23,15 +23,15 @@ due_date = st.date_input(
     value=None
 )
 
-due_date = st.date_input("期限", value=None)
-
 if st.button("追加"):
     if new_todo:
         supabase.table("todos").insert({
             "title": new_todo,
             "due_date": due_date.isoformat() if due_date else None
         }).execute()
+        st.success("Todoを追加しました")
         st.rerun()
+
 
 
 
