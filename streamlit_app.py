@@ -8,7 +8,7 @@ supabase = create_client(
     SUPABASE_URL,
     SUPABASE_KEY
 )
-select * from todos;
+
 
 st.title("📝 Todoリスト管理アプリ")
 
@@ -28,7 +28,8 @@ if st.button("追加"):
 # --- Todo一覧 ---
 st.subheader("Todo一覧")
 
-todos = supabase.table("todos").select("*").order("created_at").execute().data
+todos = supabase.table("todos").select("*").execute()
+st.write(todos.data)
 
 for todo in todos:
     col1, col2, col3 = st.columns([6, 2, 2])
