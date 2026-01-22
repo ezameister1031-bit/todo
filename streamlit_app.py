@@ -21,23 +21,25 @@ st.title("📝 Todoリスト管理アプリ")
 st.subheader("Todoを追加")
 
 new_todo = st.text_input("やること")
-due_date = st.date_input("期限", value=None)
+due_date = st.date_input(
+    "期限",
+    value=datetime.date.today()
+)
+
 
 if st.button("追加"):
     if new_todo:
-        res = supabase.table("todos").insert({
-            "title": new_todo,
-            # date → 文字列に変換（重要）
-            "due_date": due_date.isoformat() if due_date else None
-        }).execute()
+        data = {
+            "title": new_todo
+        }
 
-        if res.data is None:
-            st.error("Todoの追加に失敗しました")
-            st.write(res)
-            st.stop()
+        if due_date:
+            data["due_date"] = due_date.isoformat()
 
+        supabase.table("todos").insert(data).execute()
         st.success("Todoを追加しました")
         st.rerun()
+
     else:
         st.warning("やることを入力してください")
 
