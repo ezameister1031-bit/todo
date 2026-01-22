@@ -53,10 +53,12 @@ for todo in todos:
         )
 
     with col2:
-        if todo["due_date"]:
-            st.write(f"📅 {todo['due_date']}")
-        else:
-            st.write("期限なし")
+    due = todo.get("due_date")
+    if due:
+        st.write(f"📅 {due}")
+    else:
+        st.write("期限なし")
+
 
 
 
